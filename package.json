@@ -1,0 +1,24 @@
+{
+  "name": "teekhijuban",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Roast!"
+  ],
+  "homepage": "https://github.com/Krishna5601-Cpu/TeekhiJuban#readme",
+  "bugs": {
+    "url": "https://github.com/Krishna5601-Cpu/TeekhiJuban/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krishna5601-Cpu/TeekhiJuban.git"
+  },
+  "license": "ISC",
+  "author": "Krishna Singh Chauhan",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  }
+}
