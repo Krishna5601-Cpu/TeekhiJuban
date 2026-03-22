@@ -7,7 +7,7 @@ dotenv.config(); // Loads Enviroment Variables
 
 const app = express(); // Creates App Engine
 
-app.use(cors()); //
+app.use(cors()); // Cross Origin Resource Sharing 
 app.use(express.json());
 
 app.get("/", (req, res) => {
