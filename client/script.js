@@ -1,5 +1,6 @@
 // State Management -
 let state = "home";
+let selectedParameter = null;
 
 function renderView() {
   if (state === "select") {
@@ -30,6 +31,61 @@ const showParameterSelection = () => {
   appFlow.style.display = "block";
   renderParameterCards();
 };
+
+const renderInputScreen = (title) => {
+  appFlow.innerHTML = `
+    <h2 style="margin-bottom:20px;">${title}</h2>
+
+    <p style="margin-bottom:20px;color:#bbb;">
+      Enter items line by line for best roasting 😈
+    </p>
+
+    <textarea id="userInput"
+      style="
+        width:100%;
+        max-width:600px;
+        height:160px;
+        padding:15px;
+        border-radius:10px;
+        border:none;
+        outline:none;
+        margin-bottom:20px;
+      "
+      placeholder="Example:
+Naruto
+Death Note
+Rent a Girlfriend"
+    ></textarea>
+
+    <br>
+
+    <select id="roastType"
+      style="padding:10px;border-radius:8px;margin-bottom:20px;">
+        <option value="friendly">Friendly Roast</option>
+        <option value="savage">Savage Roast</option>
+        <option value="villain">Villain Roast</option>
+    </select>
+
+    <br>
+
+    <input id="intensity" type="range" min="1" max="5" value="3" />
+
+    <p style="margin-bottom:20px;">Intensity Level 🌶️</p>
+
+    <button id="generateRoast"
+      style="
+        padding:14px 30px;
+        background:linear-gradient(45deg,#ff4d4d,#ff1a75);
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
+        font-weight:600;
+      ">
+      Generate Roast 🔥
+    </button>
+  `;
+};
+
 const renderParameterCards = () => {
   const parameters = [
     { id: "music", label: "🎧 Music Taste" },
@@ -74,6 +130,8 @@ const renderParameterCards = () => {
 
     card.addEventListener("click", () => {
       console.log("Selected: ", params.id);
+      selectedParameter = params.id;
+      renderInputScreen(params.label);
     });
 
     grid.appendChild(card);
