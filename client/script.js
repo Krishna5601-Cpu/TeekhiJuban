@@ -32,6 +32,46 @@ const showParameterSelection = () => {
   renderParameterCards();
 };
 
+const renderRoastResult = (text, type, intensity) => {
+  appFlow.innerHTML = `
+    <h2 style="margin-bottom:30px;">🔥 Your Roast is Ready</h2>
+
+    <div style="
+      max-width:600px;
+      margin:auto;
+      padding:30px;
+      border-radius:14px;
+      background:linear-gradient(45deg,#ff4d4d20,#ff1a7520);
+      border:1px solid #ff4d4d;
+      font-style:italic;
+    ">
+      <p>
+        (Demo Roast)  
+        You entered <b>${text.split("\n").length}</b> questionable choices.  
+        Choosing <b>${type}</b> roast at intensity <b>${intensity}</b>  
+        shows emotional bravery.
+      </p>
+    </div>
+
+    <button id="roastAgain"
+      style="
+        margin-top:30px;
+        padding:12px 26px;
+        border-radius:10px;
+        border:none;
+        background:linear-gradient(45deg,#ff4d4d,#ff1a75);
+        cursor:pointer;
+        font-weight:600;
+      ">
+      Roast Again 🔁
+    </button>
+  `;
+
+  document
+    .getElementById("roastAgain")
+    .addEventListener("click", showParameterSelection);
+};
+
 const renderInputScreen = (title) => {
   appFlow.innerHTML = `
     <h2 style="margin-bottom:20px;">${title}</h2>
@@ -84,6 +124,16 @@ Rent a Girlfriend"
       Generate Roast 🔥
     </button>
   `;
+
+  const btn = document.getElementById("generateRoast");
+
+  btn.addEventListener("click", () => {
+    const text = document.getElementById("userInput").value;
+    const type = document.getElementById("roastType").value;
+    const intensity = document.getElementById("intensity").value;
+
+    renderRoastResult(text, type, intensity);
+  });
 };
 
 const renderParameterCards = () => {
