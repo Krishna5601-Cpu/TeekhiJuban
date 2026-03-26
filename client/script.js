@@ -1,16 +1,17 @@
 // State Management -
 let state = "home";
 let selectedParameter = null;
-
-function renderView() {
-  if (state === "select") {
-  }
-  if (state === "input") {
-  }
-  if (state === "result") {
-  }
-}
-
+const loadingMessages = [
+  "Analysing your questionable taste…",
+  "Consulting savage department…",
+  "Downloading emotional damage…",
+  "Comparing you with worse users…",
+  "AI judging silently… then loudly…",
+  "Preparing roast missiles…",
+  "Scanning cringe levels…",
+  "Evaluating the weirdness in you",
+  "Judging the one who judges",
+];
 // DOM Selectors -
 
 const startBtn = document.querySelector("#startRoast");
@@ -22,6 +23,33 @@ const sample = document.querySelector(".sample");
 const cta = document.querySelector(".cta");
 
 // Functions -
+
+function renderView() {
+  if (state === "select") {
+  }
+  if (state === "input") {
+  }
+  if (state === "result") {
+  }
+}
+
+const renderLoadingScreen = (text, type, intensity) => {
+  const randomMsg =
+    loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
+
+  appFlow.innerHTML = `
+    <h2 style="margin-bottom:30px;">🤖 AI is Thinking...</h2>
+
+    <p style="color:#bbb;font-size:18px;">
+      ${randomMsg}
+    </p>
+  `;
+
+  setTimeout(() => {
+    renderRoastResult(text, type, intensity);
+  }, 2200);
+};
+
 const showParameterSelection = () => {
   hero.style.display = "none";
   how.style.display = "none";
@@ -132,7 +160,7 @@ Rent a Girlfriend"
     const type = document.getElementById("roastType").value;
     const intensity = document.getElementById("intensity").value;
 
-    renderRoastResult(text, type, intensity);
+    renderLoadingScreen(text, type, intensity);
   });
 };
 
