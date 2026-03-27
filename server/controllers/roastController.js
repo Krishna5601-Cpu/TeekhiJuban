@@ -1,14 +1,17 @@
+const analyzeTaste = require("../services/tasteAnalyzer");
+
 exports.roastUserTaste = async (req, res) => {
   try {
     const { parameter, items, roastType, intensity } = req.body;
 
-    console.log("🔥 Incoming Roast Request:", req.body);
+    const tags = analyzeTaste(parameter, items);
+
+    console.log("🔥 Tags Generated:", tags);
 
     return res.json({
       success: true,
-      demo: true,
-      message: "Backend roast endpoint working",
-      receivedData: { parameter, items, roastType, intensity },
+      tags,
+      message: "Taste analyzed successfully",
     });
   } catch (err) {
     console.error(err);
