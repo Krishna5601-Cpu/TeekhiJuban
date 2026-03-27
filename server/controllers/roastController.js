@@ -1,5 +1,6 @@
 const analyzeTaste = require("../services/tasteAnalyzer");
 const buildRoastPrompt = require("../ai/promptBuiler");
+const generateRoastFromGemini = require("../ai/geminiService");
 
 exports.roastUserTaste = async (req, res) => {
   try {
@@ -15,18 +16,18 @@ exports.roastUserTaste = async (req, res) => {
       intensity,
     });
 
-    console.log("🔥 Prompt Generated:\n", prompt);
+    const roast = await generateRoastFromGemini(prompt);
 
     return res.json({
       success: true,
+      roast,
       tags,
-      prompt, // TEMP: for testing
     });
   } catch (err) {
     console.error(err);
     res.status(500).json({
       success: false,
-      message: "Server roast error",
+      message: "AI roast generation failed",
     });
   }
 };
