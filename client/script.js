@@ -24,30 +24,45 @@ const cta = document.querySelector(".cta");
 
 // Functions -
 
-function renderView() {
+const renderView = () => {
   if (state === "select") {
   }
   if (state === "input") {
   }
   if (state === "result") {
   }
-}
+};
 
-const renderLoadingScreen = (text, type, intensity) => {
+const renderLoadingScreen = (items, type, intensity) => {
   const randomMsg =
     loadingMessages[Math.floor(Math.random() * loadingMessages.length)];
 
   appFlow.innerHTML = `
     <h2 style="margin-bottom:30px;">🤖 AI is Thinking...</h2>
-
-    <p style="color:#bbb;font-size:18px;">
-      ${randomMsg}
-    </p>
+    <p style="color:#bbb;font-size:18px;">${randomMsg}</p>
   `;
 
-  setTimeout(() => {
-    renderRoastResult(text, type, intensity);
-  }, 2200);
+  // 🔥 CALL BACKEND HERE
+  fetch("http://localhost:2027/api/roast", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      parameter: selectedParameter,
+      items,
+      roastType: type,
+      intensity,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      renderRoastResult(data.roast);
+    })
+    .catch((err) => {
+      console.error(err);
+      appFlow.innerHTML = "<p>Something went wrong 😅</p>";
+    });
 };
 
 const showParameterSelection = () => {
@@ -60,7 +75,7 @@ const showParameterSelection = () => {
   renderParameterCards();
 };
 
-const renderRoastResult = (text, type, intensity) => {
+const renderRoastResult = (roastText) => {
   appFlow.innerHTML = `
     <h2 style="margin-bottom:30px;">🔥 Your Roast is Ready</h2>
 
@@ -73,12 +88,7 @@ const renderRoastResult = (text, type, intensity) => {
       border:1px solid #ff4d4d;
       font-style:italic;
     ">
-      <p>
-        (Demo Roast)  
-        You entered <b>${text.split("\n").length}</b> questionable choices.  
-        Choosing <b>${type}</b> roast at intensity <b>${intensity}</b>  
-        shows emotional bravery.
-      </p>
+      <p>${roastText}</p>
     </div>
 
     <button id="roastAgain"
@@ -160,7 +170,12 @@ Rent a Girlfriend"
     const type = document.getElementById("roastType").value;
     const intensity = document.getElementById("intensity").value;
 
-    renderLoadingScreen(text, type, intensity);
+    const items = text
+      .split("\n")
+      .map((i) => i.trim())
+      .filter((i) => i.length > 0);
+
+    renderLoadingScreen(items, type, intensity);
   });
 };
 
