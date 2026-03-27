@@ -1,4 +1,5 @@
 const analyzeTaste = require("../services/tasteAnalyzer");
+const buildRoastPrompt = require("../ai/promptBuiler");
 
 exports.roastUserTaste = async (req, res) => {
   try {
@@ -6,12 +7,20 @@ exports.roastUserTaste = async (req, res) => {
 
     const tags = analyzeTaste(parameter, items);
 
-    console.log("🔥 Tags Generated:", tags);
+    const prompt = buildRoastPrompt({
+      parameter,
+      items,
+      tags,
+      roastType,
+      intensity,
+    });
+
+    console.log("🔥 Prompt Generated:\n", prompt);
 
     return res.json({
       success: true,
       tags,
-      message: "Taste analyzed successfully",
+      prompt, // TEMP: for testing
     });
   } catch (err) {
     console.error(err);
