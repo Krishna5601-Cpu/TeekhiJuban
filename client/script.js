@@ -76,6 +76,8 @@ const showParameterSelection = () => {
 };
 
 const renderRoastResult = (roastText) => {
+  const formatted = roastText.replace(/\n/g, "<br><br>");
+
   appFlow.innerHTML = `
     <h2 style="margin-bottom:30px;">🔥 Your Roast is Ready</h2>
 
@@ -88,7 +90,7 @@ const renderRoastResult = (roastText) => {
       border:1px solid #ff4d4d;
       font-style:italic;
     ">
-      <p>${roastText}</p>
+      <p>${formatted}</p>
     </div>
 
     <button id="roastAgain"
