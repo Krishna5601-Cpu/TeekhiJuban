@@ -1,4 +1,4 @@
-function analyzeTaste(parameter, items) {
+const analyzeTaste = (parameter, items) => {
   let tags = [];
 
   if (parameter === "anime") {
@@ -24,6 +24,6 @@ function analyzeTaste(parameter, items) {
   }
 
   return tags;
-}
+};
 
 module.exports = analyzeTaste;

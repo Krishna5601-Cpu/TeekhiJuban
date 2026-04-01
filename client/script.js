@@ -79,37 +79,70 @@ const renderRoastResult = (roastText) => {
   const formatted = roastText.replace(/\n/g, "<br><br>");
 
   appFlow.innerHTML = `
-    <h2 style="margin-bottom:30px;">🔥 Your Roast is Ready</h2>
+  <h2 style="margin-bottom:30px;">🔥 Your Roast is Ready</h2>
 
-    <div style="
-      max-width:600px;
-      margin:auto;
-      padding:30px;
-      border-radius:14px;
-      background:linear-gradient(45deg,#ff4d4d20,#ff1a7520);
-      border:1px solid #ff4d4d;
-      font-style:italic;
+  <div id="roastBox" style="
+    max-width:600px;
+    margin:auto;
+    padding:30px;
+    border-radius:14px;
+    background:linear-gradient(45deg,#ff4d4d20,#ff1a7520);
+    border:1px solid #ff4d4d;
+    font-style:italic;
+  ">
+    <p id="roastText">${formatted}</p>
+  </div>
+
+  <button id="copyRoast"
+    style="
+      margin-top:20px;
+      margin-right:10px;
+      padding:12px 26px;
+      border-radius:10px;
+      border:none;
+      background:#222;
+      color:white;
+      cursor:pointer;
+      font-weight:600;
     ">
-      <p>${formatted}</p>
-    </div>
+    📋 Copy Roast
+  </button>
 
-    <button id="roastAgain"
-      style="
-        margin-top:30px;
-        padding:12px 26px;
-        border-radius:10px;
-        border:none;
-        background:linear-gradient(45deg,#ff4d4d,#ff1a75);
-        cursor:pointer;
-        font-weight:600;
-      ">
-      Roast Again 🔁
-    </button>
-  `;
+  <button id="roastAgain"
+    style="
+      margin-top:20px;
+      padding:12px 26px;
+      border-radius:10px;
+      border:none;
+      background:linear-gradient(45deg,#ff4d4d,#ff1a75);
+      cursor:pointer;
+      font-weight:600;
+    ">
+    Roast Again 🔁
+  </button>
+`;
 
   document
     .getElementById("roastAgain")
     .addEventListener("click", showParameterSelection);
+
+  const copyBtn = document.getElementById("copyRoast");
+
+  copyBtn.addEventListener("click", () => {
+    const text = roastText; // original text (not HTML)
+
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        copyBtn.innerText = "✅ Copied!";
+        setTimeout(() => {
+          copyBtn.innerText = "📋 Copy Roast";
+        }, 2000);
+      })
+      .catch(() => {
+        copyBtn.innerText = "❌ Failed";
+      });
+  });
 };
 
 const renderInputScreen = (title) => {
