@@ -12,6 +12,14 @@ const buildRoastPrompt = ({ parameter, items, tags, roastType, intensity }) => {
     tone = "dramatic and evil anime villain style";
   }
 
+  let emojiGuide = "";
+
+  if (intensity >= 4) {
+    emojiGuide = "Use savage emojis like 💀🔥😈";
+  } else {
+    emojiGuide = "Use light emojis like 😂🙂";
+  }
+
   return `
 You are TeekhiJuban AI — a savage roast generator.
 
@@ -26,9 +34,13 @@ Instructions:
 - Keep it SHORT, SHARP, and FUNNY
 - Maximum 2-3 lines only
 - Each line should hit hard
+- Use relevant emojis naturally (🔥😂💀😈🤡)
+- ${emojiGuide}
+- Do NOT overuse emojis (max 1-2 per line)
 - No long paragraphs
 - No explanations
 - Make it meme-worthy and shareable
+- Occasionally use Hinglish (Hindi + English mix)
 
 Output format:
 Line 1
