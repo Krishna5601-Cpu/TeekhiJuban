@@ -6,21 +6,21 @@ const path = require("path");
 
 const roastRoutes = require("./routes/roastRoutes");
 
-const app = express();
+const app = express(); // Creates App Engine
 
 app.use(cors());
 app.use(express.json());
 
-app.use("/api/roast", roastRoutes);
+app.use("/api/roast", roastRoutes); 
 
 // Static frontend
 app.use(express.static(path.join(__dirname, "../client")));
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/index.html"));
-});
+}); // Home Routing
 
-const PORT = process.env.PORT || 2626;
+const PORT = process.env.PORT || 2027;
 
 app.listen(PORT, () => {
   console.log(`🔥 Server is running on http://localhost:${PORT}`);

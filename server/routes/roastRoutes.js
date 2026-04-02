@@ -1,5 +1,5 @@
 const express = require("express");
-const roastRouter = express.Router();
+const roastRouter = express.Router(); // Creates Router
 
 const { roastUserTaste } = require("../controllers/roastController");
 
