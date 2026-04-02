@@ -12,6 +12,34 @@ const loadingMessages = [
   "Evaluating the weirdness in you",
   "Judging the one who judges",
 ];
+
+const placeholderExamples = {
+  music: `Example:
+Arijit Singh
+Drake
+Lo-fi Beats`,
+
+  anime: `Example:
+Naruto
+Death Note
+Attack on Titan`,
+
+  games: `Example:
+GTA V
+Minecraft
+Call of Duty`,
+
+  movies: `Example:
+Interstellar
+Dark
+Inception`,
+
+  personality: `Example:
+Introvert
+Overthinker
+Lazy`,
+};
+
 // DOM Selectors -
 
 const startBtn = document.querySelector("#startRoast");
@@ -145,7 +173,7 @@ const renderRoastResult = (roastText) => {
   });
 };
 
-const renderInputScreen = (title) => {
+const renderInputScreen = (title, paramId) => {
   appFlow.innerHTML = `
     <h2 style="margin-bottom:20px;">${title}</h2>
 
@@ -154,21 +182,18 @@ const renderInputScreen = (title) => {
     </p>
 
     <textarea id="userInput"
-      style="
-        width:100%;
-        max-width:600px;
-        height:160px;
-        padding:15px;
-        border-radius:10px;
-        border:none;
-        outline:none;
-        margin-bottom:20px;
-      "
-      placeholder="Example:
-Naruto
-Death Note
-Rent a Girlfriend"
-    ></textarea>
+  style="
+    width:100%;
+    max-width:600px;
+    height:160px;
+    padding:15px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    margin-bottom:20px;
+  "
+  placeholder="${placeholderExamples[paramId]}"
+></textarea>
 
     <br>
 
@@ -259,7 +284,7 @@ const renderParameterCards = () => {
     card.addEventListener("click", () => {
       console.log("Selected: ", params.id);
       selectedParameter = params.id;
-      renderInputScreen(params.label);
+      renderInputScreen(params.label, params.id);
     });
 
     grid.appendChild(card);
