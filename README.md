@@ -263,12 +263,6 @@ GEMINI_API_KEY=your_gemini_api_key
 
 ---
 
-### ⚠️ Important Notes
-
-- Never commit your `.env` file to version control.
-- Keep your API keys secure and private.
-- Make sure `.env` is included in your `.gitignore`.
-
 ## Future Improvements -
 
 - 🎨 **Frontend Upgrade (Tailwind Css)**
