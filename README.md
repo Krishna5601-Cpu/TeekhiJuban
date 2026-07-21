@@ -189,7 +189,7 @@ Follow these steps to run the project locally:
 ### 1️. Clone the Repository
 
 ```bash
-git clone [https://github.com/your-username/teekhijuban.git](https://github.com/Krishna5601-Cpu/TeekhiJuban.git)
+git clone [https://github.com/Krishna5601-Cpu/TeekhiJuban](https://github.com/Krishna5601-Cpu/TeekhiJuban.git)
 cd teekhijuban
 ```
 
